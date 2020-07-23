@@ -4,12 +4,23 @@ import (
 	"dictionnary/dictionary"
 	"flag"
 	"fmt"
+	"os"
+	"os/user"
 )
 
 func main() {
 	action := flag.String("action", "list", "What action do you perform ?")
 
-	d, err := dictionary.New("./badger")
+	u, err := user.Current()
+	if err != nil {
+		fmt.Println("Unable to find user home directory")
+		os.Exit(1)
+	}
+
+	homeDir := u.HomeDir
+
+	dir := fmt.Sprintf("%v/%s", homeDir, ".badger/")
+	d, err := dictionary.New(dir)
 	handleErr(err)
 	defer d.Close()
 
