@@ -9,7 +9,6 @@ import (
 func main() {
 	action := flag.String("action", "list", "What action do you perform ?")
 
-
 	d, err := dictionary.New("./badger")
 	handleErr(err)
 	defer d.Close()
@@ -20,6 +19,8 @@ func main() {
 	switch *action {
 	case "list":
 		actionList(d)
+	case "get":
+		actionGet(d, flag.Args())
 	case "add":
 		actionAdd(d, flag.Args())
 	case "remove":
@@ -36,6 +37,13 @@ func actionList(d *dictionary.Dictionary) {
 	for _, word := range words {
 		fmt.Println(entries[word])
 	}
+}
+
+func actionGet(d *dictionary.Dictionary, args []string) {
+	word := args[0]
+	entry, err := d.Get(word)
+	handleErr(err)
+	fmt.Printf("%v\t%v added to the todolist\n", entry.Word, entry.Definition)
 }
 
 func actionAdd(d *dictionary.Dictionary, args []string) {
