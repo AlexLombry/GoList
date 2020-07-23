@@ -18,7 +18,7 @@ type Entry struct {
 
 func (e Entry) String() string {
 	created := e.CreatedAt.Format(time.Stamp)
-	return fmt.Sprintf("%-10v\t%-50v%-6%v", e.Word, e.Definition, created)
+	return fmt.Sprintf("%-10v\t%-50v%-6v", e.Word, e.Definition, created)
 }
 
 func New(dir string) (*Dictionary, error) {

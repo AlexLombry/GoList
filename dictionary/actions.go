@@ -69,7 +69,7 @@ func (d *Dictionary) List() ([]string, map[string]Entry, error) {
 }
 
 func sortedKeys(entries map[string]Entry) []string {
-	// make a map of siwe entries slice, range, sort and return
+	// make a map of size entries slice, range, sort and return
 	keys := make([]string, len(entries))
 	for key, _ := range entries {
 		keys = append(keys, key)
