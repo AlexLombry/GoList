@@ -11,7 +11,13 @@ func main() {
 	handleErr(err)
 	defer d.Close()
 
-	d.Add("go", "good one")
+	d.Add("php", "another one")
+	d.Add("java", "no way")
+	words, entries, _ := d.List()
+	for _, word := range words {
+		fmt.Println(entries[word])
+	}
+
 	entry, _ := d.Get("go")
 	fmt.Println(entry)
 }
