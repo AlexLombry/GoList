@@ -8,13 +8,6 @@ import (
 
 func main() {
 	fmt.Println("Kickstart ...")
-
-	db, err := BadgerConnect()
-	if err != nil {
-		panic(err)
-	}
-
-
 }
 
 func BadgerConnect() (*badger.DB, error) {
