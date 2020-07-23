@@ -1,23 +1,19 @@
 package main
 
 import (
+	"dictionnary/dictionary"
 	"fmt"
-	"github.com/dgraph-io/badger/v2"
-	"log"
 )
 
 func main() {
 	fmt.Println("Kickstart ...")
+	d, err := dictionary.New("./badger")
+	handleErr(err)
+	defer d.Close()
 }
 
-func BadgerConnect() (*badger.DB, error) {
-	// Open the Badger database located in the /tmp/badger directory.
-	// It will be created if it doesn't exist.
-	db, err := badger.Open(badger.DefaultOptions("/tmp/badger"))
+func handleErr(err error) {
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("Dictionary error:%v\n", err)
 	}
-	defer db.Close()
-
-	return db, err
 }
