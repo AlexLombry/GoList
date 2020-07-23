@@ -10,6 +10,10 @@ func main() {
 	d, err := dictionary.New("./badger")
 	handleErr(err)
 	defer d.Close()
+
+	d.Add("go", "good one")
+	entry, _ := d.Get("go")
+	fmt.Println(entry)
 }
 
 func handleErr(err error) {
